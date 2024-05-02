@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
@@ -31,6 +32,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
+}
+
+// this will handle all unhandled error reponses
+export function CatchBoundary() {}
+
+export function ErrorBoundary() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+        <title>An error occured!</title>
+      </head>
+      <body>
+        <header></header>
+        <main className="error">
+          <h1>An error occured in Root! This is the catch all...</h1>
+          <p>
+            Back to <Link to={"/"}>Safety</Link>!
+          </p>
+        </main>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  );
 }
 
 export default function App() {

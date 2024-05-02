@@ -1,8 +1,8 @@
+import { useLoaderData, Link } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import NewNote from "~/components/NewNote";
 import { getStoredNotes, storeNotes } from "~/data/notes";
 import NoteList, { links as noteListLinks } from "~/components/NoteList";
-import { useLoaderData } from "@remix-run/react";
 
 export default function NotesPage() {
   const notes = useLoaderData();
@@ -12,6 +12,23 @@ export default function NotesPage() {
       <NoteList notes={notes} />
     </main>
   );
+}
+
+// this will run on the server, not client
+// triggered with a get request to this route
+export async function loader() {
+  const notes = await getStoredNotes();
+  // if (!notes || notes.length === 0) {
+  //   throw json(
+  //     { message: "Could not find any notes" },
+  //     {
+  //       status: 404,
+  //       statusText: "Not Found",
+  //     }
+  //   );
+  // }
+  // return json(notes);
+  return notes;
 }
 
 // this will run on the server, not client
@@ -36,10 +53,17 @@ export async function action({ request }) {
   return redirect("/notes");
 }
 
-// this will run on the server, not client
-// triggered with a get request to this route
-export async function loader() {
-  const notes = await getStoredNotes();
-  // return json(notes);
-  return notes;
+// handles error respones on this route
+// route specific
+export function CatchBoundary() {}
+
+export function ErrorBoundary() {
+  return (
+    <main className="error">
+      <h1>An error occured related to your Notes!</h1>
+      <p>
+        Back to <Link to={"/"}>Safety</Link>!
+      </p>
+    </main>
+  );
 }
