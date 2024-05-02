@@ -1,9 +1,1 @@
-{
-  "notes": [
-    {
-      "title": "Test title",
-      "content": "Test content",
-      "id": "2024-05-02T16:18:00.147Z"
-    }
-  ]
-}
+{"notes":[{"title":"Test title","content":"Test content","id":"2024-05-02T16:18:00.147Z"},{"title":"A second note","content":"Remix is awesome!","id":"2024-05-02T16:38:39.746Z"},{"title":"A third note","content":"Another content writtent","id":"2024-05-02T16:44:06.963Z"},{"title":"Number Four","content":"Hi there!","id":"2024-05-02T16:45:14.685Z"}]}
